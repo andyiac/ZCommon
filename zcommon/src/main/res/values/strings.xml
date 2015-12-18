@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Library</string>
+    <string name="netutil_check_msg"> please check your network</string>
+</resources>
