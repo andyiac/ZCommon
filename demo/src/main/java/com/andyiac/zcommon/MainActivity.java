@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -62,8 +63,16 @@ public class MainActivity extends AppCompatActivity {
     private void initView() {
         mAdapter = new ListAdapterHolder(mData);
         mRecyclerView = (RecyclerView) findViewById(R.id.id_main_recycler_view);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        float paddingStart = getResources().getDimension(R.dimen.divider_padding_start);
+
+        mRecyclerView.setHasFixedSize(true);
+
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(this,
+                DividerItemDecoration.VERTICAL_LIST, paddingStart, false));
+
 
     }
 
