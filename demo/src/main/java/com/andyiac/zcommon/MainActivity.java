@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        this.databaseList();
     }
 
     private void initData() {
@@ -60,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         mData.add("get current date");
         mData.add("get app version code");
         mData.add("show time picker");
+        mData.add("get database list");
     }
 
     private void initView() {
@@ -100,6 +102,8 @@ public class MainActivity extends AppCompatActivity {
             ZCommon.showAlertDialog(this, "get app version code", ZCommon.getAppVersionCode(this) + "", false);
         } else if (which.equals(mData.get(5))) {
             ZCommon.showTimePickerDialog(this, (TextView) view.findViewById(R.id.tv_main_activity_list_item_content));
+        } else if( which.equals(mData.get(6))){
+            ZCommon.showAlertDialog(this,"data base list",StringUtils.joinArrayOnComma(databaseList()),false);
         }
 
 
