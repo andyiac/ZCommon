@@ -17,6 +17,7 @@ import java.util.List;
 public class ListAdapterHolder extends RecyclerView.Adapter<ListAdapterHolder.ViewHolder> {
 
     private List<String> mData;
+    private ItemClickListener itemClickListener;
 
     public ListAdapterHolder(List<String> data) {
         this.mData = data;
@@ -32,14 +33,20 @@ public class ListAdapterHolder extends RecyclerView.Adapter<ListAdapterHolder.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Log.e("TAG", "position=====>>" + position);
         holder.tvContent.setText(mData.get(position));
     }
-
 
     @Override
     public int getItemCount() {
         return mData.size();
+    }
+
+    public interface ItemClickListener {
+        void onItemClick(View view, String content);
+    }
+
+    public void setOnItemClickListener(ItemClickListener listener) {
+        this.itemClickListener = listener;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -49,10 +56,16 @@ public class ListAdapterHolder extends RecyclerView.Adapter<ListAdapterHolder.Vi
         public ViewHolder(View itemView) {
             super(itemView);
             tvContent = (TextView) itemView.findViewById(R.id.tv_main_activity_list_item_content);
+            itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
+
+            Log.e("TAG","====================");
+            if (itemClickListener != null) {
+                itemClickListener.onItemClick(v, mData.get((getLayoutPosition())));
+            }
 
         }
     }

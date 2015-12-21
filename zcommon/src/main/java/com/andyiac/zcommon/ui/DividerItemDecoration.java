@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.andyiac.zcommon;
+package com.andyiac.zcommon.ui;
 
 import android.content.Context;
 import android.content.res.TypedArray;

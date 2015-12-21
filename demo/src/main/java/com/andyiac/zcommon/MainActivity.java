@@ -8,11 +8,14 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
+import com.andyiac.zcommon.ui.DividerItemDecoration;
 import com.andyiac.zcommon.utlis.KeyBoardTools;
 
 import java.util.ArrayList;
@@ -52,16 +55,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initData() {
-
         mData.add("get device id");
         mData.add("get device height");
-        mData.add("git device weight");
-        mData.add("git device weight");
         mData.add("git device weight");
     }
 
     private void initView() {
         mAdapter = new ListAdapterHolder(mData);
+
+
         mRecyclerView = (RecyclerView) findViewById(R.id.id_main_recycler_view);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -72,6 +74,26 @@ public class MainActivity extends AppCompatActivity {
 
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this,
                 DividerItemDecoration.VERTICAL_LIST, paddingStart, false));
+
+        mAdapter.setOnItemClickListener(new ListAdapterHolder.ItemClickListener() {
+            @Override
+            public void onItemClick(View view, String content) {
+                routeFunction(content);
+            }
+        });
+
+    }
+
+    private void routeFunction(String which) {
+
+
+        if (which.equals(mData.get(0))) {
+            ZCommon.showAlertDialog(this, "device id", ZCommon.getDeviceId(this), false);
+        } else if (which.equals(mData.get(1))) {
+            ZCommon.showAlertDialog(this, "device height", ZCommon.getDeviceHeight(this) + "", false);
+        } else if (which.equals(mData.get(2))) {
+            ZCommon.showAlertDialog(this, "device width", ZCommon.getDeviceWidth(this) + "", false);
+        }
 
 
     }
