@@ -650,11 +650,10 @@ public class ZCommon {
      * show timepicker
      *
      * @param mContext
-     * @param mTextView formar of the time
-     * @return show timepicker
+     * @param mTextView textView to show  the time
+     * @return show time picker
      */
-    public static void showTimePickerDialog(final Context mContext,
-                                            final TextView mTextView) {
+    public static void showTimePickerDialog(final Context mContext, final TextView mTextView) {
         new TimePickerDialog(mContext, new OnTimeSetListener() {
 
             @Override
@@ -663,7 +662,10 @@ public class ZCommon {
                 dateTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
                 dateTime.set(Calendar.MINUTE, minute);
 
-                mTextView.setText(timeFormatter.format(dateTime.getTime()).toString());
+                if (mTextView != null) {
+                    mTextView.setText(timeFormatter.format(dateTime.getTime()).toString());
+                }
+
             }
         }, dateTime.get(Calendar.HOUR_OF_DAY), dateTime.get(Calendar.MINUTE),
                 false).show();

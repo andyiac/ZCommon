@@ -8,12 +8,11 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.andyiac.zcommon.ui.DividerItemDecoration;
 import com.andyiac.zcommon.utlis.KeyBoardTools;
@@ -58,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
         mData.add("get device id");
         mData.add("get device height");
         mData.add("git device weight");
+        mData.add("get current date");
+        mData.add("get app version code");
+        mData.add("show time picker");
     }
 
     private void initView() {
@@ -78,14 +80,13 @@ public class MainActivity extends AppCompatActivity {
         mAdapter.setOnItemClickListener(new ListAdapterHolder.ItemClickListener() {
             @Override
             public void onItemClick(View view, String content) {
-                routeFunction(content);
+                routeFunction(view, content);
             }
         });
 
     }
 
-    private void routeFunction(String which) {
-
+    private void routeFunction(View view, String which) {
 
         if (which.equals(mData.get(0))) {
             ZCommon.showAlertDialog(this, "device id", ZCommon.getDeviceId(this), false);
@@ -93,6 +94,12 @@ public class MainActivity extends AppCompatActivity {
             ZCommon.showAlertDialog(this, "device height", ZCommon.getDeviceHeight(this) + "", false);
         } else if (which.equals(mData.get(2))) {
             ZCommon.showAlertDialog(this, "device width", ZCommon.getDeviceWidth(this) + "", false);
+        } else if (which.equals(mData.get(3))) {
+            ZCommon.showAlertDialog(this, "current date", ZCommon.getCurrentDate("yyyy-MM-dd hh:mm:ss"), false);
+        } else if (which.equals(mData.get(4))) {
+            ZCommon.showAlertDialog(this, "get app version code", ZCommon.getAppVersionCode(this) + "", false);
+        } else if (which.equals(mData.get(5))) {
+            ZCommon.showTimePickerDialog(this, (TextView) view.findViewById(R.id.tv_main_activity_list_item_content));
         }
 
 
@@ -100,23 +107,17 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }
