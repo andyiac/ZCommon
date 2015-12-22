@@ -1,5 +1,6 @@
 package com.andyiac.zcommon;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.andyiac.zcommon.db.DatabaseExampleActivity;
 import com.andyiac.zcommon.ui.DividerItemDecoration;
 import com.andyiac.zcommon.utlis.KeyBoardTools;
 
@@ -62,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         mData.add("get app version code");
         mData.add("show time picker");
         mData.add("get database list");
+        mData.add("goto Databases Activity");
     }
 
     private void initView() {
@@ -102,8 +105,12 @@ public class MainActivity extends AppCompatActivity {
             ZCommon.showAlertDialog(this, "get app version code", ZCommon.getAppVersionCode(this) + "", false);
         } else if (which.equals(mData.get(5))) {
             ZCommon.showTimePickerDialog(this, (TextView) view.findViewById(R.id.tv_main_activity_list_item_content));
-        } else if( which.equals(mData.get(6))){
-            ZCommon.showAlertDialog(this,"data base list",StringUtils.joinArrayOnComma(databaseList()),false);
+        } else if (which.equals(mData.get(6))) {
+            ZCommon.showAlertDialog(this, "data base list", StringUtils.joinArrayOnComma(databaseList()), false);
+        } else if (which.equals(mData.get(7))) {
+            Intent intent = new Intent();
+            intent.setClass(this, DatabaseExampleActivity.class);
+            startActivity(intent);
         }
 
 
