@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         mData.add("show time picker");
         mData.add("get database list");
         mData.add("goto Databases Activity");
+        mData.add("web view load js test");
     }
 
     private void initView() {
@@ -110,6 +111,10 @@ public class MainActivity extends AppCompatActivity {
         } else if (which.equals(mData.get(7))) {
             Intent intent = new Intent();
             intent.setClass(this, DatabaseExampleActivity.class);
+            startActivity(intent);
+        } else if (which.equals(8)) {
+            Intent intent = new Intent();
+            intent.setClass(this, TestWebViewActivity.class);
             startActivity(intent);
         }
 
